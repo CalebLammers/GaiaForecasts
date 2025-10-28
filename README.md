@@ -7,12 +7,30 @@ Prerequisites for re-creating catalogs: numpy, matplotlib, os, ctypes, healpy, e
 Our mock catalogs are included as '.csv' files and can be accessed using the code below.
 
 ```python
-import SOMETHING
+import pandas as pd
 
-LOAD CATALOGS
+dataframe = pd.read_csv('DR4_mock_exoplanet_catalog.csv', encoding='utf-8') 
 
-print(len(SOMETHING))
-# >>> 12345566
+print(dataframe.shape)
+# >>> (7545, 35)
+
+print(dataframe.keys())
+# >>> Index(['Gaia source IDs', 'True distance [pc]', 'True RA [deg]',
+#       'True Dec [deg]', 'Stellar mass [M_\odot]', 'G-band mag',
+#       'True planet mass [M_J]', 'True period [days]',
+#       'True inclination [deg]', 'True eccentricity', 'True omega [deg]',
+#       'True Omega [deg]', 'True T_peri [days]', 'Best-fit planet mass [M_J]',
+#       'Best-fit period [days]', 'Best-fit inclination [deg]',
+#       'Best-fit eccentricity', 'Best-fit omega [deg]', 'Best-fit Omega [deg]',
+#       'Best-fit T_peri [days]', 'MCMC distance 16th [pc]',
+#       'MCMC distance 50th [pc]', 'MCMC distance 84th [pc]',
+#       'MCMC period 16th [days]', 'MCMC period 50th [days]',
+#       'MCMC period 84th [days]', 'MCMC planet mass 16th [M_J]',
+#       'MCMC planet mass 50th [M_J]', 'MCMC planet mass 84th [M_J]',
+#       'MCMC eccentricity 16th', 'MCMC eccentricity 50th',
+#       'MCMC eccentricity 84th', 'MCMC inclination 16th [deg]',
+#       'MCMC inclination 50th [deg]', 'MCMC inclination 84th [deg]'],
+#      dtype='object')
 ```
 
 The stars in the mock catalog are real Gaia sources, so any desired parameters that were not included in the catalog can be retrieved using the Gaia source IDs. The mock catalogs of planet-impostor binaries ('.csv' and '.csv') can be loaded analogously.
