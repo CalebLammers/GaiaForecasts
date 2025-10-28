@@ -9,14 +9,12 @@ Our mock catalogs are included as '.csv' files and can be accessed using the cod
 ```python
 import pandas as pd
 
-# load DR4 catalog (DR5 catalog can be loaded analogously)
-dataframe = pd.read_csv('DR4_mock_exoplanet_catalog.csv', encoding='utf-8') 
+dataframe = pd.read_csv('DR4_mock_exoplanet_catalog.csv', encoding='utf-8') # 'DR4' or 'DR5'
 
-# 7545 DR4 sources, each of which has 35 values
 print(dataframe.shape)
 # >>> (7545, 35)
 
-# quantities in catalog
+# 35 quantities in catalog
 print(dataframe.keys())
 # >>> Index(['Gaia source IDs', 'True distance [pc]', 'True RA [deg]',
 #       'True Dec [deg]', 'Stellar mass [M_\odot]', 'G-band mag',
