@@ -14,8 +14,7 @@ dataframe = pd.read_csv('DR4_mock_exoplanet_catalog.csv', encoding='utf-8') # 'D
 print(dataframe.shape)
 # >>> (7545, 35)
 
-# 35 quantities in catalog
-print(dataframe.keys())
+print(dataframe.keys()) # 35 quantities in catalog
 # >>> Index(['Gaia source IDs', 'True distance [pc]', 'True RA [deg]',
 #       'True Dec [deg]', 'Stellar mass [M_\odot]', 'G-band mag',
 #       'True planet mass [M_J]', 'True period [days]',
@@ -33,11 +32,44 @@ print(dataframe.keys())
 #       'MCMC inclination 50th [deg]', 'MCMC inclination 84th [deg]'],
 #      dtype='object')
 ```
+The code in 'Figure notebooks' illustrates how the catalogs can be used to reproduce the figures that appear in the paper. Stars in the mock catalog are real Gaia sources, so any desired parameters that were not included in the catalog can be retrieved using the Gaia source IDs.
 
-The stars in the mock catalog are real Gaia sources, so any desired parameters that were not included in the catalog can be retrieved using the Gaia source IDs. The mock catalogs of planet-impostor binaries ('.csv' and '.csv') can be loaded analogously.
+# Mock DR4 & DR5 planet impostor binary catalogs
+
+The mock catalogs of planet-impostor binaries can be loaded analogously to the exoplanet catalogs.
+
+```python
+import pandas as pd
+
+dataframe = pd.read_csv('DR4_mock_planet_impostor_catalog.csv', encoding='utf-8') # 'DR4' or 'DR5'
+
+print(dataframe.shape)
+# >>> (1151, 38)
+
+print(dataframe.keys()) # 38 quantities in catalog
+# >>> Index(['Binary source ID', 'True distance [pc]', 'True RA [deg]',
+#       'True Dec [deg]', 'Primary stellar mass [M_\odot]',
+#       'Secondary stellar mass [M_\odot]', 'Apparent stellar mass [M_\odot]',
+#       'Primary G-band mag', 'Secondary G-band mag', 'Apparent G-band mag',
+#       'True period [days]', 'True inclination [deg]', 'True eccentricity',
+#       'True omega [deg]', 'True Omega [deg]', 'True T_peri [days]',
+#       'Best-fit planet mass [M_J]', 'Best-fit period [days]',
+#       'Best-fit inclination [deg]', 'Best-fit eccentricity',
+#       'Best-fit omega [deg]', 'Best-fit Omega [deg]',
+#       'Best-fit T_peri [days]', 'MCMC distance 16th [pc]',
+#       'MCMC distance 50th [pc]', 'MCMC distance 84th [pc]',
+#       'MCMC period 16th [days]', 'MCMC period 50th [days]',
+#       'MCMC period 84th [days]', 'MCMC planet mass 16th [M_J]',
+#       'MCMC planet mass 50th [M_J]', 'MCMC planet mass 84th [M_J]',
+#       'MCMC eccentricity 16th', 'MCMC eccentricity 50th',
+#       'MCMC eccentricity 84th', 'MCMC inclination 16th [deg]',
+#       'MCMC inclination 50th [deg]', 'MCMC inclination 84th [deg]'],
+#      dtype='object')
+```
+The true parameters for the stellar companions are included, along with the 'apparent' values that would have been inferred if the sources were erroneously interpreted as single stars hosting planets.
 
 # Creating custom mock catalogs
-The orbit fits for all planets are included as '.csv' files so that users can create mock catalogs with different detection criteria. The code below illustrates how to load the orbit fits and apply the detection criteria used to make our fiducial catalogs.
+Orbit-fit results for all planets are included, allowing users to create mock catalogs with different detection criteria. The code below illustrates how to load the orbit fits and apply the detection criteria used to make the fiducial catalogs.
 
 ```python
 import SOMETHING
@@ -49,4 +81,4 @@ print(len(SOMETHING))
 ```
 
 # Contact
-Feel free to contact me at caleb [dot] lammers [at] princeton [dot] edu if you have questions/comments.
+Feel free to contact me at caleb [dot] lammers [at] princeton [dot] edu if you have questions/comments!
