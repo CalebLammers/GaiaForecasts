@@ -1,5 +1,5 @@
 # [Gaia Exoplanet Forecasts](https://arxiv.org/abs/????.?????)
-This repository contains code and supplementary material for the Gaia forecasts presented in Lammers & Winn submitted (https://arxiv.org/abs/????.?????). Scripts are included to reproduce our semi-analytical calculation, generate and fit simulated Gaia astrometry, and make the figures that appear in the paper.
+This repository contains code and supplementary material for the Gaia forecasts presented in Lammers & Winn submitted (https://arxiv.org/abs/????.?????). Scripts are included to reproduce the semi-analytical calculation, generate and fit simulated Gaia astrometry, and make the figures that appear in the paper.
 
 ![](parameter_space.png)
 
@@ -32,7 +32,7 @@ print(dataframe.keys()) # 35 quantities in catalog
 #       'MCMC inclination 50th [deg]', 'MCMC inclination 84th [deg]'],
 #      dtype='object')
 ```
-The code in 'Figure notebooks' illustrates how the catalogs can be used to reproduce the figures that appear in the paper. Stars in the mock catalog are real Gaia sources, so any desired parameters that were not included in the catalog can be retrieved using the Gaia source IDs.
+The code in 'Figure notebooks' illustrates how the catalogs can be used to reproduce the figures that appear in the paper. Stars in the mock catalog are real Gaia sources, so any desired parameters that were not included in the catalog can be retrieved using the Gaia source IDs (see 'CMD for planet hosting stars and binaries (Fig 15).ipynb').
 
 # Mock DR4 & DR5 planet impostor binary catalogs
 
@@ -69,16 +69,24 @@ print(dataframe.keys()) # 38 quantities in catalog
 The true parameters for the stellar companions are included, along with the 'apparent' values that would have been inferred if the sources were erroneously interpreted as single stars hosting planets.
 
 # Creating custom mock catalogs
-Orbit-fit results for all planets are included, allowing users to create mock catalogs with different detection criteria. The code below illustrates how to load the orbit fits and apply the detection criteria used to make the fiducial catalogs.
+Results for all orbit fits are included in a master file, allowing users to create mock catalogs with different detection criteria. The code below illustrates how to load the orbit fits and apply the detection criteria used to make the fiducial catalogs.
 
 ```python
-import SOMETHING
+import pandas as pd
 
-LOAD CATALOGS
+dataframe = pd.read_csv('DR4_master_orbital_fits.csv', encoding='utf-8') # 'DR4' or 'DR5'
 
-print(len(SOMETHING))
-# >>> 12345566
+print(dataframe.shape)
+# >>> (29129, 35)
+
+planet_masses = np.array(dataframe['Best-fit planet mass [M_J]'])
+Porb_84th = np.array(dataframe['MCMC period 84th [days]'])
+Porb_16th = np.array(dataframe['MCMC period 16th [days]'])
+detection_criteria = ((planet_masses < 13.0) & (Porb_84th/Porb_16th < 1.5))
+print(len(planet_masses[detection_criteria])) # as in exoplanet catalog
+# >>> 7545
 ```
+We restricted our attention to planets with \Delta \chi^2 > 50 and an orbital period < 7 years for DR4 (< 14 years for DR5). To modify these choices, one must re-run the experiment ('PYTHON FILE NAME'), which requires computational resources or patience.
 
 # Contact
 Feel free to contact me at caleb [dot] lammers [at] princeton [dot] edu if you have questions/comments!
