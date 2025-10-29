@@ -55,7 +55,7 @@ if __name__ == "__main__":
         G_mags, BPs, RPs, ruwes, masses = np.array(G_mags), np.array(BPs), np.array(RPs), np.array(ruwes), np.array(masses)
         
         # save files (still too big for GitHub)
-        with open("/scratch/gpfs/cl5968/gaia_data/Gaia_relevant_stars_MS_final_chunked_sep17/file" + str(run_num) + ".pkl", "wb") as f:
+        with open("/scratch/gpfs/cl5968/gaia_data/Gaia_relevant_stars_MS_final_chunked/file" + str(run_num) + ".pkl", "wb") as f:
             pickle.dump(source_ids, f)
             pickle.dump(ras, f)
             pickle.dump(decs, f)
