@@ -86,7 +86,7 @@ detection_criteria = ((planet_masses < 13.0) & (Porb_84th/Porb_16th < 1.5))
 print(len(planet_masses[detection_criteria])) # as in exoplanet catalog
 # >>> 7545
 ```
-We restricted our attention to planets with \Delta \chi^2 > 50 and an orbital period < 7 years for DR4 (< 14 years for DR5). To modify these choices, one must re-run the experiment ('PYTHON FILE NAME'), which requires computational resources or patience.
+We restricted our attention to planets with \Delta \chi^2 > 50 and an orbital period < 7 years for DR4 (< 14 years for DR5). To modify these choices, one must re-run the experiment (see 'DR4_exoplanet_catalog_fits.py'), which requires computational resources or patience.
 
 # Contact
 Feel free to contact me at caleb [dot] lammers [at] princeton [dot] edu if you have questions/comments!
