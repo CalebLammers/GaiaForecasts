@@ -12,9 +12,9 @@ import pandas as pd
 dataframe = pd.read_csv('DR4_mock_exoplanet_catalog.csv', encoding='utf-8') # 'DR4' or 'DR5'
 
 print(dataframe.shape)
-# >>> (7545, 35)
+# >>> (7545, 36)
 
-print(dataframe.keys()) # 35 quantities in catalog
+print(dataframe.keys()) # 36 quantities in catalog
 # >>> Index(['Gaia source IDs', 'True distance [pc]', 'True RA [deg]',
 #       'True Dec [deg]', 'Stellar mass [M_\odot]', 'G-band mag',
 #       'True planet mass [M_J]', 'True period [days]',
@@ -29,7 +29,8 @@ print(dataframe.keys()) # 35 quantities in catalog
 #       'MCMC planet mass 50th [M_J]', 'MCMC planet mass 84th [M_J]',
 #       'MCMC eccentricity 16th', 'MCMC eccentricity 50th',
 #       'MCMC eccentricity 84th', 'MCMC inclination 16th [deg]',
-#       'MCMC inclination 50th [deg]', 'MCMC inclination 84th [deg]'],
+#       'MCMC inclination 50th [deg]', 'MCMC inclination 84th [deg]',
+#       '\Delta \chi^2'],
 #      dtype='object')
 ```
 The code in 'Figure notebooks' illustrates how the catalogs can be used to reproduce the figures that appear in the paper. Stars in the mock catalog are real Gaia sources, so any desired parameters that were not included in the catalog can be retrieved using the Gaia source IDs (see 'CMD for planet hosting stars and binaries (Fig 15).ipynb').
@@ -44,9 +45,9 @@ import pandas as pd
 dataframe = pd.read_csv('DR4_mock_planet_impostor_catalog.csv', encoding='utf-8') # 'DR4' or 'DR5'
 
 print(dataframe.shape)
-# >>> (1151, 38)
+# >>> (1151, 39)
 
-print(dataframe.keys()) # 38 quantities in catalog
+print(dataframe.keys()) # 39 quantities in catalog
 # >>> Index(['Binary source ID', 'True distance [pc]', 'True RA [deg]',
 #       'True Dec [deg]', 'Primary stellar mass [M_\odot]',
 #       'Secondary stellar mass [M_\odot]', 'Apparent stellar mass [M_\odot]',
@@ -63,7 +64,8 @@ print(dataframe.keys()) # 38 quantities in catalog
 #       'MCMC planet mass 50th [M_J]', 'MCMC planet mass 84th [M_J]',
 #       'MCMC eccentricity 16th', 'MCMC eccentricity 50th',
 #       'MCMC eccentricity 84th', 'MCMC inclination 16th [deg]',
-#       'MCMC inclination 50th [deg]', 'MCMC inclination 84th [deg]'],
+#       'MCMC inclination 50th [deg]', 'MCMC inclination 84th [deg]',
+#       '\Delta \chi^2'],
 #      dtype='object')
 ```
 The true parameters for the stellar companions are included, along with the 'apparent' values that would have been inferred if the sources were erroneously interpreted as single stars hosting planets.
@@ -77,16 +79,17 @@ import pandas as pd
 dataframe = pd.read_csv('DR4_master_orbital_fits.csv', encoding='utf-8') # 'DR4' or 'DR5'
 
 print(dataframe.shape)
-# >>> (29129, 35)
+# >>> (29129, 36)
 
 planet_masses = np.array(dataframe['Best-fit planet mass [M_J]'])
-Porb_84th = np.array(dataframe['MCMC period 84th [days]'])
-Porb_16th = np.array(dataframe['MCMC period 16th [days]'])
-detection_criteria = ((planet_masses < 13.0) & (Porb_84th/Porb_16th < 1.5))
-print(len(planet_masses[detection_criteria])) # as in exoplanet catalog
+delta_chi2s = np.array(dataframe['\Delta \chi^2'])
+Porb_84ths = np.array(dataframe['MCMC period 84th [days]'])
+Porb_16ths = np.array(dataframe['MCMC period 16th [days]'])
+detection_criteria = (((planet_masses < 13.0) & (delta_chi2s > 50.0)) & (Porb_84ths/Porb_16ths < 1.5))
+print(len(planet_masses[detection_criteria])) # as in DR4 exoplanet catalog
 # >>> 7545
 ```
-We restricted our attention to planets with \Delta \chi^2 > 50 and an orbital period < 7 years for DR4 (< 14 years for DR5). To modify these choices, one must re-run the experiment (see 'DR4_exoplanet_catalog_fits.py'), which requires computational resources or patience.
+Note that we only performed MCMC analyses for planets with \Delta \chi^2 > 50 and an orbital period < 7 years for DR4 (< 14 years for DR5). To modify these choices, one must re-run the experiment (see 'DR4_exoplanet_catalog_fits.py'), which requires some computational resources or patience.
 
 # Contact
 Feel free to contact me at caleb [dot] lammers [at] princeton [dot] edu if you have questions/comments!
