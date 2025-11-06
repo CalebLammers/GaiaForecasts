@@ -1,5 +1,5 @@
 # [Gaia Exoplanet Forecasts](https://arxiv.org/abs/????.?????)
-This repository contains code and supplementary material for the Gaia forecasts presented in Lammers & Winn submitted (https://arxiv.org/abs/????.?????). Scripts are included to reproduce the semi-analytical calculation, generate and fit simulated Gaia astrometry, and make the figures that appear in the paper.
+This repository contains code and supplementary material for the Gaia forecasts presented in Lammers & Winn 2025 (https://arxiv.org/abs/????.?????). Scripts are included to reproduce the semi-analytical calculation, generate and fit simulated Gaia astrometry, and make the figures that appear in the paper.
 
 ![](parameter_space.png)
 
@@ -75,6 +75,7 @@ Results for all orbit fits are included in a master file, allowing users to crea
 
 ```python
 import pandas as pd
+import numpy as np
 
 dataframe = pd.read_csv('DR4_master_orbital_fits.csv', encoding='utf-8') # 'DR4' or 'DR5'
 
@@ -89,7 +90,7 @@ detection_criteria = (((planet_masses < 13.0) & (delta_chi2s > 50.0)) & (Porb_84
 print(len(planet_masses[detection_criteria])) # as in DR4 exoplanet catalog
 # >>> 7545
 ```
-Note that we only performed MCMC analyses for planets with \Delta \chi^2 > 50 and an orbital period < 7 years for DR4 (< 14 years for DR5). To modify these choices, one must re-run the experiment (see 'DR4_exoplanet_catalog_fits.py'), which requires some computational resources or patience.
+Note that we only performed MCMC analyses for planets with \Delta \chi^2 > 50 and an orbital period < 7 years for DR4 (< 14 years for DR5). Also, we only injected companions with masses below 13 M_J. To modify these choices, one must re-run the experiment (see 'DR4_exoplanet_catalog_fits.py'), which requires computational resources or patience.
 
 # Contact
 Feel free to contact me at caleb [dot] lammers [at] princeton [dot] edu if you have questions/comments!
