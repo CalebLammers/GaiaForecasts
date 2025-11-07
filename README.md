@@ -1,5 +1,5 @@
-# [Gaia Exoplanet Forecasts](https://arxiv.org/abs/????.?????)
-This repository contains code and supplementary material for the Gaia forecasts presented in Lammers & Winn 2025 (https://arxiv.org/abs/????.?????). Scripts are included to reproduce the semi-analytical calculation, generate and fit simulated Gaia astrometry, and make the figures that appear in the paper.
+# [Gaia Exoplanet Forecasts](https://arxiv.org/abs/2511.04673)
+This repository contains code and supplementary material for the Gaia forecasts presented in Lammers & Winn 2025 (https://arxiv.org/abs/2511.04673). Scripts are included to reproduce the semi-analytical calculation, generate and fit simulated Gaia astrometry, and make the figures that appear in the paper.
 
 ![](parameter_space.png)
 
