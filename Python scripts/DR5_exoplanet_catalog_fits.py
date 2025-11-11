@@ -21,6 +21,8 @@ def planet_occurrence(M_star, a, C=350.0, beta=-0.86, a0 = 3.6, gamma=1.59):
     dlogm = np.log(6000) - np.log(30)
     occurrence_rate = occurrence_rate/(719.0*dlogm*0.63)
 
+    return occurrence_rate # returns dNplanets / (dNstars * dlnm * dlna)
+
 # MCMC function: fit orbit and calculate log probability (if parameters are physical)
 def log_probability(theta, t_ast_yr, psi, plx_factor, ast_obs, ast_err):
     lp = log_prior(theta)
